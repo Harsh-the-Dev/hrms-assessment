@@ -38,7 +38,7 @@ services:
       cd frontend
       npm install
       npm run build
-    staticPublishPath: ./frontend/build
+    staticPublishPath: ./frontend/dist  # Vite uses 'dist' folder, not 'build'
     envVars:
       - key: REACT_APP_API_URL
         value: https://hrms-backend.onrender.com
