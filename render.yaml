@@ -2,13 +2,13 @@ services:
   - type: web
     name: hrms-backend
     env: python
-    region: singapore  # or oregon/mumbai based on your location
+    region: singapore
     plan: free
     buildCommand: |
       pip install --upgrade pip
-      pip install -r requirements.txt
-      python manage.py collectstatic --noinput
-      python manage.py migrate --noinput
+      pip install -r backend/requirements.txt
+      python backend/manage.py collectstatic --noinput
+      python backend/manage.py migrate --noinput
     startCommand: gunicorn hrms.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: DATABASE_URL
@@ -36,10 +36,6 @@ services:
     envVars:
       - key: REACT_APP_API_URL
         value: https://hrms-backend.onrender.com
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
     autoDeploy: true
 
 databases:
